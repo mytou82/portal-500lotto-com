@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资料卡片 · 500彩票网官方索引</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #fafafa;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
+            line-height: 1.6;
+            color: #1d1d1f;
+            padding: 2rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 720px;
+            width: 100%;
+        }
+
+        /* 主视觉 – 极简留白卡片 */
+        .hero-card {
+            margin-top: 1.25rem;
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 2.5rem 2rem 2.2rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02), 0 1px 4px rgba(0, 0, 0, 0.02);
+            border: 1px solid #f0f0f0;
+            transition: box-shadow 0.2s;
+        }
+
+        .hero-card h1 {
+            font-size: 2.1rem;
+            font-weight: 560;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.4rem;
+            color: #111;
+        }
+
+        .hero-card .sub {
+            font-size: 1rem;
+            color: #6b6b6b;
+            border-left: 3px solid #d4d4d4;
+            padding-left: 1rem;
+            margin: 0.75rem 0 1.5rem 0;
+        }
+
+        .hero-card .tagline {
+            font-size: 0.95rem;
+            color: #3a3a3a;
+            max-width: 80%;
+        }
+
+        /* 通用卡片样式 */
+        .card-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.75rem 1.8rem;
+            border: 1px solid #ececee;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.01);
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            font-weight: 520;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.9rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #2c2c2e;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.3rem;
+        }
+
+        .card li {
+            padding: 0.4rem 0 0.4rem 1.2rem;
+            position: relative;
+        }
+
+        .card li::before {
+            content: "·";
+            position: absolute;
+            left: 0.1rem;
+            color: #7d7d7d;
+            font-weight: 600;
+        }
+
+        .inline-link {
+            color: #1d4f8b;
+            text-decoration: none;
+            font-weight: 470;
+            border-bottom: 1px solid #d0dbe9;
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        .inline-link:hover {
+            color: #0b2d4e;
+            border-bottom-color: #0b2d4e;
+        }
+
+        /* 人群卡片 – 多列布局 */
+        .audience-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.6rem;
+        }
+
+        .audience-item {
+            background: #f7f7f9;
+            border-radius: 40px;
+            padding: 0.4rem 1.1rem;
+            font-size: 0.9rem;
+            color: #1f1f1f;
+            border: 1px solid #eaeaea;
+            white-space: nowrap;
+        }
+
+        /* 自然链接段落 */
+        .link-paragraph {
+            background: white;
+            border-radius: 24px;
+            padding: 1.75rem 1.8rem;
+            border: 1px solid #ececee;
+            margin-top: 0.25rem;
+        }
+
+        .link-paragraph p {
+            font-size: 0.95rem;
+            color: #2c2c2e;
+            margin-bottom: 0.6rem;
+        }
+
+        .link-paragraph p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-summary {
+            margin-top: 1.8rem;
+            padding: 0.5rem 0;
+        }
+
+        .faq-summary details {
+            margin-bottom: 0.75rem;
+            border-bottom: 1px dashed #e0e0e0;
+            padding-bottom: 0.6rem;
+        }
+
+        .faq-summary summary {
+            font-weight: 480;
+            font-size: 0.95rem;
+            cursor: pointer;
+            color: #1f1f1f;
+            padding: 0.2rem 0;
+        }
+
+        .faq-summary summary::-webkit-details-marker {
+            color: #8a8a8a;
+        }
+
+        .faq-summary p {
+            margin-top: 0.4rem;
+            color: #3c3c3c;
+            font-size: 0.9rem;
+            padding-left: 0.3rem;
+        }
+
+        .footnote {
+            margin-top: 2.5rem;
+            font-size: 0.78rem;
+            color: #89898b;
+            text-align: center;
+            border-top: 1px solid #eaeaec;
+            padding-top: 2rem;
+            letter-spacing: 0.2px;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 1.25rem 0.75rem; }
+            .hero-card { padding: 1.8rem 1.2rem; }
+            .hero-card h1 { font-size: 1.65rem; }
+            .card, .link-paragraph { padding: 1.3rem 1.1rem; }
+            .audience-item { white-space: normal; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- 主视觉 -->
+    <div class="hero-card">
+        <h1>资料整理 · 信息索引</h1>
+        <div class="sub">从零散到有序 · 一份关于平台的简明卡片</div>
+        <div class="tagline">
+            围绕 <a href="https://portal-500lotto.com" class="inline-link">500彩票网官方</a> 的信息梳理，聚焦日常使用中的几个切面。
+        </div>
+    </div>
+
+    <!-- 用途卡片 -->
+    <div class="card-grid">
+        <div class="card">
+            <h2>日常用途 · 三个侧面</h2>
+            <ul>
+                <li>资讯参考 —— 关注彩种动态、活动公告与数据更新。</li>
+                <li>历史记录 —— 翻阅往期结果，辅助个人资料整理。</li>
+                <li>规则查阅 —— 不同玩法的说明与条款，便于对比了解。</li>
+            </ul>
+        </div>
+
+        <!-- 适合人群卡片 -->
+        <div class="card">
+            <h2>适合哪些人</h2>
+            <p style="margin-bottom: 0.6rem;">如果下面这些描述与你有关，或许可以作为日常信息的一个索引入口：</p>
+            <div class="audience-row">
+                <span class="audience-item">习惯自助查询</span>
+                <span class="audience-item">关注数字规律</span>
+                <span class="audience-item">信息整合型</span>
+                <span class="audience-item">规则对比型</span>
+                <span class="audience-item">轻度浏览者</span>
+                <span class="audience-item">数据收集者</span>
+            </div>
+            <p style="margin-top: 0.9rem; color: #4a4a4a; font-size: 0.9rem;">
+                以上归类仅基于常见使用情境，每个人习惯不同，按需取用即可。
+            </p>
+        </div>
+    </div>
+
+    <!-- 自然链接段落：嵌入 500彩票网官方 -->
+    <div class="link-paragraph">
+        <p>
+            如果你在整理网络书签或想了解某个平台的基本信息，可以直接参考 <a href="https://portal-500lotto.com" class="inline-link">500彩票网官方</a> 的内容版块。
+            从导航布局到页面分类，整体偏向功能导向，适合快速定位自己需要的条目。
+        </p>
+        <p>
+            另外，首页通常汇集了近期的重点更新与常用入口，对于初次接触的人来说，花几分钟浏览一下菜单结构，能更快建立对信息分布的整体印象。
+        </p>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-summary">
+        <details>
+            <summary>这个页面和官方是什么关系？</summary>
+            <p>这是一个独立的资料索引卡片页，内容基于公开信息整理，不隶属于官方。所有指向官方的链接均使用 <a href="https://portal-500lotto.com" class="inline-link">500彩票网官方</a> 作为文字标识。</p>
+        </details>
+        <details>
+            <summary>为什么用卡片形式？</summary>
+            <p>卡片结构能让信息区块更清晰，适合快速扫读。对于日常查阅、笔记整理来说，比长段落更省力。</p>
+        </details>
+        <details>
+            <summary>是否有使用建议？</summary>
+            <p>建议将本页当作一个“信息索引草稿”，配合官方页面一同浏览。对于具体活动或规则，以官方最新公告为准。</p>
+        </details>
+    </div>
+
+    <div class="footnote">
+        d84149b52dfdcacc · 内容参考卡 · 仅供信息整理参考
+    </div>
+
+</div>
+</body>
+</html>
